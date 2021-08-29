@@ -6,15 +6,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bello.databinding.ActivityLoginBinding
 import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val firebaseAuthListener = FirebaseAuth.AuthStateListener {
         val user = firebaseAuth.currentUser?.uid
@@ -23,22 +26,25 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
     }
-    private val emailET = findViewById<EditText>(R.id.emailET)
-    private val emailTIL = findViewById<TextInputLayout>(R.id.emailTIL)
-    private val passwordET = findViewById<EditText>(R.id.passwordET)
-    private val passwordTIL = findViewById<TextInputLayout>(R.id.passwordTIL)
-    private val loginProgressLayout = findViewById<ProgressBar>(R.id.progressBar)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //removing the Action Bar
         supportActionBar?.hide()
 
+        binding.progressBar.visibility = View.GONE
+        setTextChangeListener(binding.emailET, binding.emailTIL)
+        setTextChangeListener(binding.passwordET, binding.passwordTIL)
 
-        setTextChangeListener(emailET, emailTIL)
-        setTextChangeListener(passwordET, passwordTIL)
+        binding.forgetPasswordTV.setOnClickListener {
+            goToForgotPassword()
+        }
+        binding.signUpTV.setOnClickListener {
+            goToSignUp()
+        }
     }
 
     private fun setTextChangeListener(et: EditText, til: TextInputLayout) {
@@ -60,7 +66,11 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    fun onLogin(v: View) {
+    fun onLogin() {
+        val emailET: EditText = binding.emailET
+        val emailTIL: TextInputLayout = binding.emailTIL
+        val passwordET: EditText = binding.passwordET
+        val passwordTIL: TextInputLayout = binding.passwordTIL
         var proceed = true
         if(emailET.text.isNullOrEmpty()){
             emailTIL.error = "Email is required"
@@ -73,11 +83,11 @@ class LoginActivity : AppCompatActivity() {
             proceed = false
         }
         if(proceed){
-            loginProgressLayout.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
             firebaseAuth.signInWithEmailAndPassword(emailET.text.toString(), passwordET.text.toString())
                 .addOnCompleteListener { task: Task<AuthResult> ->
                     if (!task.isSuccessful) {
-                        loginProgressLayout.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
                         Toast.makeText(this@LoginActivity, "Login error: Either the email or password is wrong.", Toast.LENGTH_SHORT).show()
                     }else{
 
@@ -88,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }.addOnFailureListener{e: Exception ->
                     e.printStackTrace()
-                    loginProgressLayout.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 }
 
         }
@@ -104,12 +114,12 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.removeAuthStateListener { firebaseAuthListener }
     }
 
-    fun goToSignUp(v: View) {
+    private fun goToSignUp() {
         startActivity(Intent(this, SignUpActivity::class.java))
         finish()
     }
 
-    fun goToForgotPassword(v: View) {
+    private fun goToForgotPassword() {
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
         Toast.makeText(this@LoginActivity, "Don't worry your password would be restored.", Toast.LENGTH_SHORT).show()
         finish()

@@ -22,15 +22,9 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/grid_2x"
-                android:layout_marginTop="@dimen/grid_2x"
-                android:layout_marginEnd="@dimen/grid_2x"
-                android:layout_marginBottom="@dimen/grid_2x"
-                android:contentDescription="@null"
-                android:src="@drawable/title" />
+                android:src="@drawable/title"
+                style="@style/FormImage"
+                android:contentDescription="@string/todo"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailTIL"
@@ -44,7 +38,6 @@
                     android:id="@+id/emailET"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:ems="10"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/light_black_transparent"
@@ -66,20 +59,18 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColor="@color/light_green"
-                    android:textColorHint="@color/light_green_transparent"
+                    android:textColor="@color/light_black_transparent"
+                    android:textColorHint="@color/light_black_transparent"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/button_login"
-                style="@style/StandardButton"
-                android:layout_width="@dimen/standard_width"
-                android:layout_height="@dimen/standard_height"
-                android:layout_below="@+id/passwordTIL"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/grid_2x"
-                android:onClick="onLogin"
+                style="@style/StandardFormButton"
+                android:layout_marginStart="@dimen/grid_2x"
+                android:layout_marginTop="@dimen/grid_2x"
+                android:layout_marginEnd="@dimen/grid_2x"
+                android:layout_marginBottom="@dimen/grid_2x"
                 android:text="@string/button_login" />
 
             <TextView
@@ -95,7 +86,6 @@
                 android:layout_marginBottom="@dimen/grid_2x"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="goToSignUp"
                 android:text="@string/sign_upText"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -112,7 +102,6 @@
                 android:layout_marginBottom="@dimen/grid_2x"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="goToForgotPassword"
                 android:text="@string/forgot_password_reset_textView"
                 tools:ignore="TouchTargetSizeCheck" />
 
