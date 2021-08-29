@@ -24,6 +24,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
+        //removing the Action Bar
+        supportActionBar?.hide()
         binding.progressBar.visibility = View.GONE
         setTextChangeListener(binding.emailFET, binding.emailFTIL)
 

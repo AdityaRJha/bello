@@ -45,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
         binding.signUpTV.setOnClickListener {
             goToSignUp()
         }
+        binding.buttonLogin.setOnClickListener {
+            onLogin()
+        }
     }
 
     private fun setTextChangeListener(et: EditText, til: TextInputLayout) {
@@ -86,15 +89,15 @@ class LoginActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
             firebaseAuth.signInWithEmailAndPassword(emailET.text.toString(), passwordET.text.toString())
                 .addOnCompleteListener { task: Task<AuthResult> ->
-                    if (!task.isSuccessful) {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, "Login error: Either the email or password is wrong.", Toast.LENGTH_SHORT).show()
-                    }else{
-
+                    if (task.isSuccessful) {
                         Toast.makeText(this, "Successfully Logged in", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
+                    }
+                    else{
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(this@LoginActivity, "Login error: Either the email or password is wrong.", Toast.LENGTH_SHORT).show()
                     }
                 }.addOnFailureListener{e: Exception ->
                     e.printStackTrace()

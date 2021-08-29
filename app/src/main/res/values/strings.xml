@@ -27,4 +27,6 @@
     <string name="todo">TODO</string>
     <string name="submit">Submit</string>
     <string name="remember_password_login">Remember password? Login</string>
+    <string name="next">Next</string>
+    <string name="signOut">SignOut</string>
 </resources>
