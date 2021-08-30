@@ -9,6 +9,13 @@ import com.google.firebase.auth.FirebaseAuth
 class HomeActivity : AppCompatActivity() {
 
     private val mAuth = FirebaseAuth.getInstance()
+    private val mAuthStateListener = FirebaseAuth.AuthStateListener {
+        val user = mAuth.currentUser?.uid
+        user?.let {
+            startActivity(Intent (this, LoginActivity::class.java))
+            finish()
+        }
+    }
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +27,18 @@ class HomeActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             mAuth.signOut()
-            startActivity(Intent (this, LoginActivity::class.java))
-            finish()
         }
+    }
+
+    override fun onStop()
+    {
+        super.onStop()
+        mAuth.removeAuthStateListener { mAuthStateListener }
+    }
+
+    override fun onStart()
+    {
+        super.onStart()
+        mAuth.addAuthStateListener { mAuthStateListener }
     }
 }
