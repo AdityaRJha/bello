@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="grid_1by2x">2dp</dimen>
+    <dimen name="titleBar_standard_elevation">5dp</dimen>
+    <dimen name="standard_tab_elevation">5dp</dimen>
+</resources>

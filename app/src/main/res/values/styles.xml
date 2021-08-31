@@ -19,12 +19,6 @@
         <item name="android:textColor">@color/light_green</item>
     </style>
 
-    <style name="Heading">
-        <item name="android:textSize">26sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor" >@color/light_green</item>
-    </style>
-
     <style name="StandardFormButton" parent="StandardButton">
         <item name="android:layout_width">@dimen/standard_width</item>
         <item name="android:layout_height">@dimen/standard_height</item>
@@ -42,5 +36,17 @@
         <item name="android:layout_marginEnd">@dimen/grid_2x</item>
         <item name="android:layout_marginBottom">@dimen/grid_2x</item>
         <item name="android:contentDescription">@string/todo</item>
+    </style>
+
+    <style name="HeadingTitleBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/grid_1x</item>
+        <item name="android:paddingStart">@dimen/grid_2x</item>
+        <item name="android:paddingEnd">@dimen/grid_2x</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
