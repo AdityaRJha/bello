@@ -1,4 +1,4 @@
-package com.example.bello
+package com.example.bello.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    fun onLogin() {
+    private fun onLogin() {
         val emailET: EditText = binding.emailET
         val emailTIL: TextInputLayout = binding.emailTIL
         val passwordET: EditText = binding.passwordET

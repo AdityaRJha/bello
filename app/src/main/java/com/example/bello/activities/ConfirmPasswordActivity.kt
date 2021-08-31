@@ -1,4 +1,4 @@
-package com.example.bello
+package com.example.bello.activities
 
 import android.content.ContentValues.TAG
 import android.content.Intent

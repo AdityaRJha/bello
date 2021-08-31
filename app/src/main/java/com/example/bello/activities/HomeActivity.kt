@@ -1,4 +1,4 @@
-package com.example.bello
+package com.example.bello.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             mAuth.signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
