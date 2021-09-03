@@ -8,19 +8,32 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
+        style="@style/titleBar"
         app:cardElevation="@dimen/titleBar_standard_elevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        style="@style/titleBar">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signOut"
+                android:background="@color/light_green_transparent"
+                android:textColor="@color/white_alpha"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.821"
+                app:layout_constraintStart_toEndOf="@+id/title_bar"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfileImage"
@@ -61,62 +74,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/standard_height"
-        android:layout_marginTop="@dimen/grid_2x"
-        android:background="@color/colorPrimary"
-        android:elevation="@dimen/standard_tab_elevation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:tabIndicatorColor="@color/white_alpha"
-        app:tabIndicatorFullWidth="true"
-        app:tabIndicatorGravity="top"
-        app:tabIndicatorHeight="@dimen/grid_1x">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabChat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:icon="@drawable/chat_feather" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/status_icon" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabBroadcast"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:icon="@drawable/broadcast_icon" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
-    <Button
-        android:id="@+id/button"
-        style="@style/StandardButton"
-        android:text="@string/signOut"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -128,4 +85,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tabIndicatorGravity="top"
+        app:tabIndicatorHeight="@dimen/grid_1x"
+        app:tabIndicatorColor="@color/white_alpha"
+        android:background="@color/colorPrimary"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

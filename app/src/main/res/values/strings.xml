@@ -29,4 +29,7 @@
     <string name="remember_password_login">Remember password? Login</string>
     <string name="next">Next</string>
     <string name="signOut">SignOut</string>
+    <string name="broadcast_fragment">BroadCast Fragment</string>
+    <string name="chat_fragment">Chat Fragment</string>
+    <string name="status_fragment">Status Fragment</string>
 </resources>
