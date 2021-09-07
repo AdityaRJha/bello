@@ -22,18 +22,6 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimary">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/signOut"
-                android:background="@color/light_green_transparent"
-                android:textColor="@color/white_alpha"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.821"
-                app:layout_constraintStart_toEndOf="@+id/title_bar"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfileImage"
@@ -42,11 +30,13 @@
                 android:layout_margin="@dimen/grid_1x"
                 android:layout_marginBottom="@dimen/grid_2x"
                 app:cardCornerRadius="@dimen/standard_corner_radius"
+                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.044"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/profile_picture"
@@ -55,7 +45,7 @@
                     android:background="@color/light_black_transparent"
                     android:contentDescription="@string/todo"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/default_user" />
+                    android:src="@drawable/aditya" />
 
             </androidx.cardview.widget.CardView>
 

@@ -14,7 +14,6 @@
     <string name="button_logout">LOGOUT</string>
     <string name="new_activity">to write new activities</string>
     <string name="home_titlebar">Home</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forgot_password_reset_textView">Forgot Password? Reset</string>
     <string name="reset_button">RESET</string>
@@ -32,4 +31,10 @@
     <string name="broadcast_fragment">BroadCast Fragment</string>
     <string name="chat_fragment">Chat Fragment</string>
     <string name="status_fragment">Status Fragment</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="settings">Settings</string>
+    <string name="aditya_roshan_jha">Aditya Roshan Jha</string>
+    <string name="adityrjha_gmail_com">adityrjha@gmail.com</string>
+    <string name="back">Back</string>
 </resources>

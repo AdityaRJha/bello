@@ -2,10 +2,12 @@ package com.example.bello.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bello.R
 import com.example.bello.databinding.ActivityHomeBinding
 import com.example.bello.fragments.HomeAdapter
+import com.example.bello.fragments.NavigationFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 
@@ -14,6 +16,18 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     private val mAuth = FirebaseAuth.getInstance()
+    private val clickListener: View.OnClickListener = View.OnClickListener {    view ->
+        when(view.id){
+            R.id.cardViewProfileImage -> openNavDialog()
+        }
+    }
+
+    private fun openNavDialog() {
+        val navDialog = NavigationFragment()
+        navDialog.show(supportFragmentManager,"customDialog")
+
+
+    }
 
     private val mAuthStateListener = FirebaseAuth.AuthStateListener {
         val user = mAuth.currentUser?.uid
@@ -50,11 +64,8 @@ class HomeActivity : AppCompatActivity() {
             }
         }.attach()
 
-        binding.button.setOnClickListener {
-            mAuth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+        binding.cardViewProfileImage.setOnClickListener(clickListener)
+        
     }
 
     override fun onStop()
@@ -68,4 +79,5 @@ class HomeActivity : AppCompatActivity() {
         super.onStart()
         mAuth.addAuthStateListener { mAuthStateListener }
     }
+
 }
