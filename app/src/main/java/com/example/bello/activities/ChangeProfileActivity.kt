@@ -131,17 +131,17 @@ class ChangeProfileActivity : AppCompatActivity() {
         map[DATA_USER_USERNAME] = userName
         map[DATA_USER_EMAIL] = email
         map[DATA_USER_BIO] = binding.bio.text.toString()
-        var check = 0
+        var check = 1
 
         firebaseDB.collection(DATA_USERS).document(userId!!).get()
             .addOnSuccessListener { documentSnapshot ->
                 val user = documentSnapshot.toObject(User::class.java)
                 if(user?.email != email){
-                    check = 1
+                    check = 0
                 }
             }
 
-        if(check == 1) {
+        if(check == 0) {
             firebaseDB.collection(DATA_USERS).document(userId).update(map)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show()
