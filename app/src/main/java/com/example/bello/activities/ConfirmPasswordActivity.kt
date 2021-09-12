@@ -104,14 +104,14 @@ class ConfirmPasswordActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(this@ConfirmPasswordActivity, "SignUp error: ${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
                     } else {
-                        mAuth.currentUser!!.sendEmailVerification().addOnCompleteListener {
-                                task -> if(task.isSuccessful) {
+                        mAuth.currentUser!!.sendEmailVerification().addOnCompleteListener { task ->
+                            if(task.isSuccessful) {
                             Log.d(TAG,"Email Sent, Verify!!")
                         }
                     }
                     Toast.makeText(this@ConfirmPasswordActivity, "Please check your email for verification", Toast.LENGTH_SHORT).show()
                     val email = emailET.text.toString()
-                    val user = User(email, username, "", arrayListOf(), arrayListOf())
+                    val user = User(email, username, "", "",arrayListOf(), arrayListOf())
                     firebaseDB.collection(DATA_USERS).document(mAuth.uid!!).set(user)
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
