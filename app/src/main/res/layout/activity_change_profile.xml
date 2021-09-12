@@ -12,7 +12,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/aditya"
+        android:src="@drawable/default_user"
         android:layout_marginEnd="16dp"
         app:civ_border_color="@color/white_alpha"
         app:civ_border_width="@dimen/grid_1x"

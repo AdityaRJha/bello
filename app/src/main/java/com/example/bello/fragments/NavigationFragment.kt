@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.bello.R
 import com.example.bello.activities.AccountSettingsActivity
@@ -47,7 +48,7 @@ class NavigationFragment: DialogFragment(R.layout.navigation_fragment_layout) {
         headerContainer = navView.getHeaderView(0)
         profilePIC = headerContainer.findViewById(R.id.profileCIV)
 
-        setProfilePic()
+        setProfilePicAndAll()
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
@@ -79,11 +80,13 @@ class NavigationFragment: DialogFragment(R.layout.navigation_fragment_layout) {
         }
     }
 
-    private fun setProfilePic() {
+    private fun setProfilePicAndAll() {
         firebaseDB.collection(DATA_USERS).document(currentUser!!).get()
             .addOnSuccessListener { documentSnapshot ->
                 val user = documentSnapshot.toObject(User::class.java)
                 imageUrl = user?.imageUrl
+                headerContainer.findViewById<TextView>(R.id.nameUser).text = user?.username
+                headerContainer.findViewById<TextView>(R.id.emailUser).text = user?.email
                 imageUrl?.let{
                     profilePIC?.loadURL(user?.imageUrl, R.drawable.default_user)
                 }

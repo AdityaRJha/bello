@@ -45,7 +45,7 @@
                     android:background="@color/light_black_transparent"
                     android:contentDescription="@string/todo"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/aditya" />
+                    android:src="@drawable/default_user" />
 
             </androidx.cardview.widget.CardView>
 
