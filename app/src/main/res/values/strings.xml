@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">bello</string>
     <string name="hint_email">Email</string>
-    <string name="password">Password</string>
     <string name="button_login">Login</string>
     <string name="sign_upText">No account? SignUp</string>
     <string name="logout">Logout</string>
@@ -39,4 +38,8 @@
     <string name="back">Back</string>
     <string name="apply">Apply</string>
     <string name="i_love_belloing">I love belloing!!</string>
+    <string name="password">Password</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="alternative_email">Alternative Email</string>
 </resources>

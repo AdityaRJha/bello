@@ -23,6 +23,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val mAuth = FirebaseAuth.getInstance()
     private var currentUser = FirebaseAuth.getInstance().currentUser?.uid
+    private lateinit var user: User
     private val clickListener: View.OnClickListener = View.OnClickListener {    view ->
         when(view.id){
             R.id.cardViewProfileImage -> openNavDialog()
@@ -35,16 +36,10 @@ class HomeActivity : AppCompatActivity() {
     private fun openNavDialog() {
         val navDialog = NavigationFragment()
         navDialog.show(supportFragmentManager,"customDialog")
-
-
     }
 
     private val mAuthStateListener = FirebaseAuth.AuthStateListener {
-        val user = mAuth.currentUser?.uid
-        user?.let {
-            startActivity(Intent (this, LoginActivity::class.java))
-            finish()
-        }
+        currentUser = mAuth.currentUser?.uid
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,10 +85,10 @@ class HomeActivity : AppCompatActivity() {
     private fun populateInfo() {
         firebaseDB.collection(DATA_USERS).document(currentUser!!).get()
             .addOnSuccessListener { documentSnapshot ->
-                val user = documentSnapshot.toObject(User::class.java)
-                imageUrl = user?.imageUrl
+                user = documentSnapshot.toObject(User::class.java)!!
+                imageUrl = user.imageUrl
                 imageUrl?.let{
-                    profilePIC?.loadURL(user?.imageUrl, R.drawable.default_user)
+                    profilePIC?.loadURL(user.imageUrl, R.drawable.default_user)
                 }
             }.addOnFailureListener { e ->
                 Log.e("ChangeProfilePicture", e.printStackTrace().toString())

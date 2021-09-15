@@ -4,8 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +18,7 @@ import com.example.bello.R
 import com.example.bello.databinding.ActivityChangeProfileBinding
 import com.example.bello.util.*
 import com.github.drjacky.imagepicker.ImagePicker
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -32,6 +36,7 @@ class ChangeProfileActivity : AppCompatActivity() {
         if (it.resultCode == Activity.RESULT_OK) {
             uri = it.data?.data!!
             // Use the uri to load the image
+            profilePIC?.setImageURI(uri)
         }
     }
 
@@ -67,6 +72,25 @@ class ChangeProfileActivity : AppCompatActivity() {
         binding.buttonApply.setOnClickListener {
             onApply()
         }
+
+        setTextChangeListener(binding.userNameET, binding.userNameTIL)
+    }
+
+    private fun setTextChangeListener(et: EditText, til: TextInputLayout) {
+        et.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                til.isErrorEnabled = false
+            }
+
+        })
     }
 
     private fun getPicture() {
@@ -122,30 +146,23 @@ class ChangeProfileActivity : AppCompatActivity() {
     }
 
     private fun onApply() {
+        updateChangeProfileActivity()
+        populateInfo()
+    }
+
+    private fun updateChangeProfileActivity() {
         binding.progressBar3.visibility = View.VISIBLE
         uri?.let { storeImage(it) }
         val userName = binding.userNameET.text.toString()
-        val email = binding.changeEmailET.text.toString()
 
         val map = HashMap<String, Any>()
         map[DATA_USER_USERNAME] = userName
-        map[DATA_USER_EMAIL] = email
         map[DATA_USER_BIO] = binding.bio.text.toString()
-        var check = 1
 
-        firebaseDB.collection(DATA_USERS).document(userId!!).get()
-            .addOnSuccessListener { documentSnapshot ->
-                val user = documentSnapshot.toObject(User::class.java)
-                if(user?.email != email){
-                    check = 0
-                }
-            }
-
-        if(check == 0) {
+        if (userId != null) {
             firebaseDB.collection(DATA_USERS).document(userId).update(map)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show()
-                    finish()
                 }.addOnFailureListener { e ->
                     Log.e("ChangeProfilePicture", e.printStackTrace().toString())
                     Toast.makeText(this, "Try Again!! Not Successful", Toast.LENGTH_SHORT).show()
@@ -153,11 +170,24 @@ class ChangeProfileActivity : AppCompatActivity() {
                 }
         }
 
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("command", '1')
-        startActivity(intent)
-        finish()
     }
+
+
+    /*private fun openEnterPassword() {
+        val enterPasswordFragment = EnterPasswordFragment()
+        enterPasswordFragment.show(supportFragmentManager, "customDialog")
+
+        supportFragmentManager.setFragmentResultListener("result", this){ _, bundle ->
+            val result = bundle.getString("result")
+            if (result?.equals('1'.toString(), true) ?: (false)){
+                updateChangeProfileActivity()
+                populateInfo()
+            }
+            else{
+                populateInfo()
+            }
+        }
+    }*/
 
     private fun populateInfo() {
         binding.progressBar3.visibility = View.VISIBLE
@@ -165,7 +195,6 @@ class ChangeProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { documentSnapshot ->
                 val user = documentSnapshot.toObject(User::class.java)
                 binding.userNameET.setText(user?.username, TextView.BufferType.EDITABLE)
-                binding.changeEmailET.setText(user?.email, TextView.BufferType.EDITABLE)
                 imageUrl = user?.imageUrl
                 imageUrl?.let{
                     profilePIC?.loadURL(user?.imageUrl, R.drawable.default_user)

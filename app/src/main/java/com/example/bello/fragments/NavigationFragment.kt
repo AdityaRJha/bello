@@ -54,6 +54,7 @@ class NavigationFragment: DialogFragment(R.layout.navigation_fragment_layout) {
             when(it.itemId){
                 R.id.profile -> {
                     startChangeProfileActivity()
+                    activity?.finish()
                     true
                 }
 

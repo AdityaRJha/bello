@@ -23,7 +23,7 @@
     <color name="transparent_black">#1A040904</color>
     <color name="Alpha">#00040904</color>
     <color name="AlphaOrange">#80F08F27</color>
-    <color name="ucrop_color_toolbar">#333333</color>
+    <color name="ucrop_color_toolbar">#00C600</color>
     <color name="ucrop_color_statusbar">#95040904</color>
-    <color name="ucrop_color_widget_active">#1A040904</color>
+    <color name="ucrop_color_widget_active">#8600C600</color>
 </resources>

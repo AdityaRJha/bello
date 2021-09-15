@@ -111,7 +111,7 @@ class ConfirmPasswordActivity : AppCompatActivity() {
                     }
                     Toast.makeText(this@ConfirmPasswordActivity, "Please check your email for verification", Toast.LENGTH_SHORT).show()
                     val email = emailET.text.toString()
-                    val user = User(email, username, "", "",arrayListOf(), arrayListOf())
+                    val user = User(email, username, "", "","", arrayListOf(), arrayListOf())
                     firebaseDB.collection(DATA_USERS).document(mAuth.uid!!).set(user)
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
