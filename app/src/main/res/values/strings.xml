@@ -42,4 +42,5 @@
     <string name="OK">OK</string>
     <string name="cancel">Cancel</string>
     <string name="alternative_email">Alternative Email</string>
+    <string name="_150">150</string>
 </resources>

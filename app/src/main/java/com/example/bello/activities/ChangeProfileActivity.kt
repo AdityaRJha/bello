@@ -47,12 +47,27 @@ class ChangeProfileActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+
         if(userId == null){
             finish()
         }
 
-
         populateInfo()
+
+        binding.bio.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                binding.textInputCounter.text = (150 - binding.bio.text.toString().length).toString()
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                binding.textInputCounter.text = (150 - binding.bio.text.toString().length).toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                binding.textInputCounter.text = (150 - binding.bio.text.toString().length).toString()
+            }
+        })
+
 
         binding.backFAB.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -173,21 +188,7 @@ class ChangeProfileActivity : AppCompatActivity() {
     }
 
 
-    /*private fun openEnterPassword() {
-        val enterPasswordFragment = EnterPasswordFragment()
-        enterPasswordFragment.show(supportFragmentManager, "customDialog")
 
-        supportFragmentManager.setFragmentResultListener("result", this){ _, bundle ->
-            val result = bundle.getString("result")
-            if (result?.equals('1'.toString(), true) ?: (false)){
-                updateChangeProfileActivity()
-                populateInfo()
-            }
-            else{
-                populateInfo()
-            }
-        }
-    }*/
 
     private fun populateInfo() {
         binding.progressBar3.visibility = View.VISIBLE
@@ -195,6 +196,7 @@ class ChangeProfileActivity : AppCompatActivity() {
             .addOnSuccessListener { documentSnapshot ->
                 val user = documentSnapshot.toObject(User::class.java)
                 binding.userNameET.setText(user?.username, TextView.BufferType.EDITABLE)
+                binding.bio.setText(user?.bio.toString())
                 imageUrl = user?.imageUrl
                 imageUrl?.let{
                     profilePIC?.loadURL(user?.imageUrl, R.drawable.default_user)
@@ -205,6 +207,6 @@ class ChangeProfileActivity : AppCompatActivity() {
                 finish()
             }
     }
-
 }
+
 
